@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theme System</title>
+
+    <!--=====CSS File=====-->
+    <link rel="stylesheet" href="darktheme.css">
+</head>
+
+<body>
+
+
+    <ul>
+        <li id="light">Light</li>
+        <li id="dark">Dark</li>
+        <li id="device">Device Theme</li>
+    </ul>
+
+    <script>
+        let body = document.querySelector('body');
+        let allModes = document.querySelectorAll('li');
+
+        for (let i = 0; i < allModes.length; i++) {
+            allModes[i].addEventListener('click', itemClicked);
+        }
+
+        function itemClicked(event) {
+            let element = event.target;
+            let id = element.id;
+
+            switchTheme(id);
+        }
+
+        function switchTheme(id) {
+            switch (id) {
+                case 'dark':
+                    body.className = 'dark';
+                    break;
+                case 'light':
+                    body.className = '';
+                    break;
+                case 'device':
+                    updateTheme();
+            }
+
+            //Mark the selected theme
+            for (let i = 0; i < allModes.length; i++) {
+                allModes[i].className = allModes[i].id == id ? 'selected' : '';
+            }
+        }
+
+        //When System theme change
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+            updateTheme();
+        });
+
+        function updateTheme() {
+            const darkTheme = window.matchMedia("(prefers-color-scheme:dark)");
+            if (darkTheme.matches) {
+                body.className = 'dark';
+            } else {
+                body.className = '';
+            }
+        }
+    </script>
+</body>
+
+</html>

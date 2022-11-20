@@ -1,0 +1,21 @@
+* {
+    box-sizing: border-box;
+}
+
+.allcolumns {
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+}
+
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+@media screen and (max-width: 768px) {
+    .allcolumns {
+        width: 100%;
+    }
+}
